@@ -9,8 +9,7 @@ pipeline {
         stage("Run Server") {  
             steps {  
                 script {  
-                    def output = sh(script: 'node server.js', returnStdout: true).trim()  
-                    println "Code ${output} is running"  
+                  sh 'node server.js &' 
                 }  
             }  
         }  
