@@ -1,28 +1,31 @@
-pipeline {  
-    agent any  
-    stages {  
-        stage("Dependencies") {  
-            steps {  
-                sh 'npm install'  
-            }  
-        }  
-        stage("Run Server") {  
-            steps {  
-                script {  
-                    def output = sh(script: 'node server.js-SNAPSHOT-1.0', returnStdout: true).trim()  
-                    println "Code ${output} is running"  
-                }  
-            }  
-        }  
-        stage("Test") {  
-            steps {  
-                sh 'npm test || echo "No tests defined"'  
-            }  
-        }  
-        stage("Build") {  
-            steps {  
-                sh 'npm run build'   
-            }  
-        }  
-    }  
-}  
+pipeline {
+    agent any
+    tools {
+        nodejs 'NodeJS' // Use the name configured in Jenkins
+    }
+    stages {
+        stage("Dependencies") {
+            steps {
+                sh 'npm install'
+            }
+        }
+        stage("Run Server") {
+            steps {
+                script {
+                    def output = sh(script: 'node server.js-SNAPSHOT-1.0', returnStdout: true).trim()
+                    println "Code ${output} is running"
+                }
+            }
+        }
+        stage("Test") {
+            steps {
+                sh 'npm test || echo "No tests defined"'
+            }
+        }
+        stage("Build") {
+            steps {
+                sh 'npm run build'
+            }
+        }
+    }
+}
