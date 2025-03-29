@@ -1,5 +1,8 @@
 pipeline {  
     agent any  
+    tools {
+        nodejs 'NodeJS' 
+    }
     stages {  
         stage("Dependencies") {  
             steps {  
@@ -8,9 +11,7 @@ pipeline {
         }  
         stage("Run Server") {  
             steps {  
-                script {  
-                  sh 'node server.js &' 
-                }  
+                sh 'node server.js &'  
             }  
         }  
         stage("Test") {  
@@ -20,8 +21,8 @@ pipeline {
         }  
         stage("Build") {  
             steps {  
-                echo 'npm run build'   
+                echo 'npm run build'  
             }  
-        }  
+        }
     }  
 }
